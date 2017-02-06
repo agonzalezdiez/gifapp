@@ -108,7 +108,9 @@ function drawCompleteGiffer(){
 
     container.html("");
 
-    var giffer_html = '<div id="giffer-container"><table id="giffer-container-table"><tr>';
+    var giffer_html = '<div id="photo-container"></div>';
+
+    giffer_html += '<div id="giffer-container"><table id="giffer-container-table"><tr>';
 
     //var images = ["data/images/vota.svg","data/images/vota.svg","data/images/vota.svg","data/images/vota.svg","data/images/vota.svg","data/images/vota.svg"];
     var images = ["data/images/YoSoyAlcalde.gif","data/images/YoSoyAlcalde.gif","data/images/YoSoyAlcalde.gif","data/images/YoSoyAlcalde.gif","data/images/YoSoyAlcalde.gif","data/images/YoSoyAlcalde.gif"];
@@ -125,6 +127,72 @@ function drawCompleteGiffer(){
     giffer_html += '</div>';
 
     container.html(giffer_html);
+    var photo_html = "";
+
+    photo_html += '<span id="photo-uploader">Subir foto para el gif</span>';
+    photo_html += '<input type="file" id="imageLoader" name="imageLoader"/><canvas id="imageCanvas"></canvas>';
+    var input = $( "input:file" ).css({
+        background: "yellow",
+          border: "3px red solid"
+    });
+
+    $("#photo-container").html(photo_html);
+
+    var imageLoader = document.getElementById('imageLoader');
+        imageLoader.addEventListener('change', handleImage, false);
+}
+
+function generateGif(new_image){
+    var gif = new GIF({
+        workers: 2,
+        quality: 10
+    });
+
+    var images = ['../data/01_losdeabajo.png','../data/02_losdeabajo.png','../data/03_losdeabajo.png','../data/04_losdeabajo.png','../data/05_losdeabajo.png','../data/06_losdeabajo.png','../data/07_losdeabajo.png','../data/08_losdeabajo.png'];
+
+    images.forEach(function(imageElement,i){
+        console.log("AAA",i);
+        var img = new Image(300,300);
+        if(i!=2){
+            img.src = imageElement;
+        }
+        else{
+            img.src = new_image;
+            console.log("IMAGE",img.src);
+        }
+        img.style.width = '300px';
+        img.style.height = 'auto';
+        console.log("IMG",img);
+        gif.addFrame(img);
+    });
+    gif.on('finished', function(blob) {
+        console.log("FINISHED",blob);
+        url = window.URL.createObjectURL(blob);
+        window.open(url,"_blank");
+        var a = document.createElement("a");
+            document.body.appendChild(a);
+            a.style = "display: none";
+            a.href = url;
+            a.download = "YoSoyAlcalde.gif";
+            a.click();
+        window.URL.revokeObjectURL(url);
+    });
+    gif.render();
+
+}
+
+function handleImage(e){
+    var canvas = document.getElementById('imageCanvas');
+    
+    var ctx = canvas.getContext('2d');
+    var reader = new FileReader();
+    var fileUploaded;
+
+    reader.onload = function(event){
+        generateGif(event.target.result,"aaaaa.png");
+    };
+
+    fileUploaded = reader.readAsDataURL(e.target.files[0]);     
 }
 
 $(document).ready(function(){
