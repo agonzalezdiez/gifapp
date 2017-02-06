@@ -1,14 +1,22 @@
 
+
+var container;
+
+
+function votaClick(){
+    console.log("VOTA CLICK");
+}
+
 function drawMain(){
 
-    var container = $("#main-container");
+    container = $("#main-container");
 
     container_html = "";
 
     container_html += '<div id="title-container">';
       container_html += '<div id="logo-left"><object class="svg-obj" id="los-de-abajo" data="data/images/los_de_abajo.svg" type="image/svg+xml"></object></div>';
       container_html += '<div id="title">MADRID 100% SOSTENIBLE>>>>></div>';
-      container_html += '<div id="participa-logo"><object class="svg-obj" id="vota" data="data/images/vota.svg" type="image/svg+xml"></object></div>';
+      container_html += '<div id="participa-logo"><img class="svg-obj" id="vota" src="data/images/vota.svg"/></div>';
     container_html += '</div>';
     container_html += '<div id="counter-container">';
       container_html += '<div class="counter-texts" id="pre-counter"><object class="svg-obj" id="madrid-tiene" data="data/images/madrid_tiene.svg" type="image/svg+xml"></object></div>';
@@ -28,7 +36,8 @@ function drawMain(){
       container_html += '<div class="counter-texts" id="post-counter"><object id="alcaldesas" data="data/images/alcaldesas.svg" type="image/svg+xml"></object></div>';
     container_html += '</div>';
     container_html += '<div id="gifer-container">';
-      container_html += '<object class="svg-obj" id="hazte-alcalde-sa" data="data/images/hazte_alcalde_sa.svg" type="image/svg+xml"></object>';
+      container_html += '<img class="svg-obj" id="hazte-alcalde-sa" src="data/images/hazte_alcalde_sa.svg" />';
+      //container_html += '<object class="svg-obj" id="hazte-alcalde-sa" data="data/images/hazte_alcalde_sa.svg" type="image/svg+xml"></object>';
     container_html += '</div>';
 
     container_html += '<div id="rrss-container">';
@@ -39,6 +48,9 @@ function drawMain(){
     container.html(container_html);
 
     drawNumber();
+
+    //console.log("VOTA",$("#vota"));
+
 }
 
 function drawNumber(){
@@ -77,11 +89,44 @@ function drawNumber(){
                 return margins[i]+"px";
             });
     });
+    $("#vota")
+        .css("cursor","pointer")
+        .click(function(d){
+            window.open("https://decide.madrid.es/vota","_blank");
+        });
+    $("#hazte-alcalde-sa")
+        .css("cursor","pointer")
+        .click(function(d){
+            drawCompleteGiffer();
+        });
+
 
 
 }
 
+function drawCompleteGiffer(){
+
+    container.html("");
+
+    var giffer_html = '<div id="giffer-container"><table id="giffer-container-table"><tr>';
+
+    //var images = ["data/images/vota.svg","data/images/vota.svg","data/images/vota.svg","data/images/vota.svg","data/images/vota.svg","data/images/vota.svg"];
+    var images = ["data/images/YoSoyAlcalde.gif","data/images/YoSoyAlcalde.gif","data/images/YoSoyAlcalde.gif","data/images/YoSoyAlcalde.gif","data/images/YoSoyAlcalde.gif","data/images/YoSoyAlcalde.gif"];
+
+    var columns = 3;
+
+    images.forEach(function(d,i){
+        if(i%columns===0){
+            giffer_html += '</tr><tr>';
+        }
+        giffer_html += '<td><img src="'+d+'"></td>';
+
+    });
+    giffer_html += '</div>';
+
+    container.html(giffer_html);
+}
+
 $(document).ready(function(){
     drawMain();
-
 });

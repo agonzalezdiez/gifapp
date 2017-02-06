@@ -53,3 +53,8 @@ body{
     font-family: "Barrio";
     color: #FFFFFF;
 }
+#giffer-container-table{
+    position: absolute;
+    left: 18%;
+    top: 50%;
+}
