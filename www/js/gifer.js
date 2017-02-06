@@ -8,28 +8,17 @@ function handleImage(e){
     var fileUploaded;
 
     reader.onload = function(event){
-        var img = new Image();
-        img.onload = function(){
-            canvas.width = img.width;
-            canvas.height = img.height;
-            ctx.drawImage(img,0,0);
-        };
-        img.src = event.target.result;
-        console.log("FILE UP",event.target.result);
-        generateGif(new File([event.target.result],"aaaaa.png"));
-        
+        generateGif(event.target.result,"aaaaa.png");
     };
 
     fileUploaded = reader.readAsDataURL(e.target.files[0]);     
-
-    //generateGif(fileUploaded);
 }
 
 function drawView(){
 
     var photo_html = "";
 
-    photo_html += '<span id="photo-uploader">Upload file</span>';
+    photo_html += '<span id="photo-uploader">Subir foto para el gif</span>';
     photo_html += '<input type="file" id="imageLoader" name="imageLoader"/><canvas id="imageCanvas"></canvas>';
     var input = $( "input:file" ).css({
         background: "yellow",
@@ -40,10 +29,10 @@ function drawView(){
 
     var controls_html = "";
 
-    controls_html += '<span id="upload-btn"></span>';
-    controls_html += '<input id="text-source" value="Enter text"></input>';
-    controls_html += '<span id="text-source-btn">Poner texto</span>';
-    controls_html += '<input id="color-picker-container" type="color"></input>';
+    //controls_html += '<span id="upload-btn"></span>';
+    //controls_html += '<input id="text-source" value="Enter text"></input>';
+    //controls_html += '<span id="text-source-btn">Poner texto</span>';
+    //controls_html += '<input id="color-picker-container" type="color"></input>';
 
     $("#controls_container").html(controls_html);
 
@@ -64,7 +53,6 @@ function drawView(){
               context.fillText(text, 100, 100);
               context.fillText("AAAAAAA", 100, 100);
         });
-
 }
 
 function generateGif(new_image){
@@ -76,16 +64,13 @@ function generateGif(new_image){
     var images = ['../data/01_losdeabajo.png','../data/02_losdeabajo.png','../data/03_losdeabajo.png','../data/04_losdeabajo.png','../data/05_losdeabajo.png','../data/06_losdeabajo.png','../data/07_losdeabajo.png','../data/08_losdeabajo.png'];
 
     images.forEach(function(imageElement,i){
-        console.log("AAA",new_image);
-        var img = new Image(300,300); // width, height vddalues are optional params 
+        console.log("AAA",i);
+        var img = new Image(300,300);
         if(i!=2){
             img.src = imageElement;
         }
         else{
-            var url2 = window.URL.createObjectURL(new_image);
-            //img.src = new_image.name;
-            img.src = url2;
-            console.log("URL",url2);
+            img.src = new_image;
             console.log("IMAGE",img.src);
         }
         img.style.width = '300px';
@@ -96,6 +81,7 @@ function generateGif(new_image){
     gif.on('finished', function(blob) {
         console.log("FINISHED",blob);
         url = window.URL.createObjectURL(blob);
+        window.open(url,"_blank");
         var a = document.createElement("a");
             document.body.appendChild(a);
             a.style = "display: none";
@@ -108,8 +94,6 @@ function generateGif(new_image){
 
 };
 
-$(document).ready(function(){
-
+/*$(document).ready(function(){
     drawView();
-
-});
+});*/
