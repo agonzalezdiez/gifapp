@@ -170,14 +170,18 @@ function drawCompleteGiffer(){
     var photo_html = "";
 
     photo_html += '<div id="photo-msg"><span class="photo-msg-text" id="photo-msg-text">PARA HACERTE ALCALDE/SA EN MADRID LO TIENES MUY FÁCIL. PUEDES VOTAR EN DECIDE.MADRID Y AQUÍ PUEDES HACERTE UN </span><span class="photo-msg-text" id="photo-msg-text-mark">GIF PERSONALIZADO</span></div>';
-    photo_html += '<img class="svg-obj" id="seleccionar-archivo" src="data/images/seleccionar_archivo.svg" />';
+    //photo_html += '<img class="svg-obj" id="seleccionar-archivo" src="data/images/seleccionar_archivo.svg" />';
     photo_html += '<div id="generated-gif-container"></div>';
-    /*photo_html += '<span id="photo-uploader">Subir foto para el gif</span>';
+    //photo_html += '<span id="photo-uploader">Subir foto para el gif</span>';
     photo_html += '<input type="file" id="imageLoader" name="imageLoader"/><canvas id="imageCanvas"></canvas>';
     var input = $( "input:file" ).css({
         background: "yellow",
-          border: "3px red solid"
-    });*/
+        opacity: 0.000001,
+        border: "3px red solid"
+    });
+    photo_html += '<label for="imageLoader" class="custom-file-upload"><img class="svg-obj" id="seleccionar-archivo" src="data/images/seleccionar_archivo.svg" /></label>';
+
+    //.css("background-image",'url("data/images/seleccionar_archivo.svg")');
 
     $("#photo-container").html(photo_html);
 
