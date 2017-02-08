@@ -1,15 +1,16 @@
 body{
     background-color: #f1e630;
+    height: 1500px;
 }
 #logo-left{
     position: absolute;
     left: 5%;
 }
-#title{
+.title{
     position: absolute;
     left: 40%;
     top: 30px;
-    font-size: 24px;
+    font-size: 30px;
 }
 #participa-logo{
     position: absolute;
@@ -18,7 +19,7 @@ body{
 #counter-container{
     position: absolute;
     top: 100px;
-    left: 25%;
+    left: 22%;
 }
 .counter-texts{
     font-size: 50px;
@@ -27,9 +28,10 @@ body{
     font-family: "Cabin";
 }
 #gifer-container{
+    display: table;
     position: absolute;
     top: 500px;
-    left: 35%;
+    left: 15%;
 }
 #lineas-contador{
     transform: translate(-100px,0px)scale(0.7);
@@ -37,7 +39,7 @@ body{
     margin-top: 60px;
 }
 .svg-obj{
-    transform: scale(0.7);
+    transform: scale(0.6);
 }
 #rrss-container{
     display: table-caption;
@@ -55,6 +57,44 @@ body{
 }
 #giffer-container-table{
     position: absolute;
-    left: 18%;
-    top: 50%;
+    top: 230%;
+    right: -2%;
+}
+#footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #40ad49;
+    color: #FFFFFF;
+}
+#footer-msg{
+    width: 45%;
+    float: left;
+    margin-left: 14%;
+    text-align: justify;
+    margin-top: 1%;
+
+}
+#footer-twitter{
+    float: right;
+    margin-right: 31%;
+    margin-top: 1%;
+}
+#photo-msg{
+    width: 50%;
+    margin-left: 13%;
+    font-size: 30px;
+    text-align: justify;
+}
+#photo-msg-text-mark{
+    text-decoration: underline;
+}
+#photo-container{
+    position: absolute;
+    top: 44%;
+}
+#seleccionar-archivo{
+    margin-left: 7%;
+    margin-top: 4%;
 }

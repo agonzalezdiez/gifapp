@@ -1,23 +1,51 @@
 
 
 var container;
+var footer;
+var header;
 
-
-function votaClick(){
-    console.log("VOTA CLICK");
-}
 
 function drawMain(){
 
+    var images = ["data/images/YoSoyAlcalde.gif","data/images/YoSoyAlcalde.gif","data/images/YoSoyAlcalde.gif","data/images/YoSoyAlcalde.gif","data/images/YoSoyAlcalde.gif","data/images/YoSoyAlcalde.gif"];
+
+    var columns = 3;
+
+    var giffer_html = '<table id="giffer-container-table"><tr>';
+
+    images.forEach(function(d,i){
+        if(i%columns===0){
+            giffer_html += '</tr><tr>';
+        }
+        giffer_html += '<td><img src="'+d+'"></td>';
+
+    });
+    giffer_html += '</div>';
+    console.log("GIFFFER",giffer_html);
+
     container = $("#main-container");
+    footer = $("#footer-container");
+    header = $("#header-container");
+
+    var header_html = "";
+    header_html += '<div id="title-container">';
+      header_html += '<div id="logo-left"><object class="svg-obj" id="los-de-abajo" data="data/images/los_de_abajo.svg" type="image/svg+xml"></object></div>';
+      header_html += '<div class="title" id="title1">MADRID 100% SOSTENIBLE>>>>></div>';
+      header_html += '<div class="title" id="title2" style="opacity:0.000001;">BILLETE ÚNICO>>>>></div>';
+      header_html += '<div id="participa-logo"><img class="svg-obj" id="vota" src="data/images/vota.svg"/></div>';
+    header_html += '</div>';
+
+    header.html(header_html);
 
     container_html = "";
 
-    container_html += '<div id="title-container">';
+    /*container_html += '<div id="title-container">';
       container_html += '<div id="logo-left"><object class="svg-obj" id="los-de-abajo" data="data/images/los_de_abajo.svg" type="image/svg+xml"></object></div>';
-      container_html += '<div id="title">MADRID 100% SOSTENIBLE>>>>></div>';
+      container_html += '<div class="title" id="title1">MADRID 100% SOSTENIBLE>>>>></div>';
+      container_html += '<div class="title" id="title2" style="opacity:0.000001;">OTRA COSA!!!!!>>>>></div>';
       container_html += '<div id="participa-logo"><img class="svg-obj" id="vota" src="data/images/vota.svg"/></div>';
     container_html += '</div>';
+    */
     container_html += '<div id="counter-container">';
       container_html += '<div class="counter-texts" id="pre-counter"><object class="svg-obj" id="madrid-tiene" data="data/images/madrid_tiene.svg" type="image/svg+xml"></object></div>';
       container_html += '<div id="counter">';
@@ -37,8 +65,12 @@ function drawMain(){
     container_html += '</div>';
     container_html += '<div id="gifer-container">';
       container_html += '<img class="svg-obj" id="hazte-alcalde-sa" src="data/images/hazte_alcalde_sa.svg" />';
+      container_html += '<img class="svg-obj" id="descarga_materiales" src="data/images/descarga_materiales.svg" />';
+      container_html += giffer_html;
       //container_html += '<object class="svg-obj" id="hazte-alcalde-sa" data="data/images/hazte_alcalde_sa.svg" type="image/svg+xml"></object>';
     container_html += '</div>';
+
+
 
     container_html += '<div id="rrss-container">';
     container_html += '<object class="svg-obj" id="logo_twitter" data="data/images/logo_twitter.svg" type="image/svg+xml"></object>';
@@ -46,6 +78,17 @@ function drawMain(){
     container_html += '</div>';
 
     container.html(container_html);
+
+    //FOOTER
+    var footer_html = '';
+
+    footer_html += '<div id="footer">';
+    footer_html += '<span id="footer-msg">Lorem fistrum sexuarl eiusmod fistro. Reprehenderit apetecan sit amet quietooor ese que llega et llevame al sircoo. Ullamco dolore torpedo labore. No te digo trigo por no llamarte Rodrigor ese hombree mamaar la caidita pupita exercitation duis quis hasta luego Lucas esse tiene musho peligro. A gramenawer de la pradera elit me cago en tus muelas diodenoo a peich no puedor sexuarl ex</span>';
+    footer_html += '<span id="footer-twitter">API TWITTER</span>';
+    footer_html += '';
+    footer_html += '</div>';
+
+    footer.html(footer_html);
 
     drawNumber();
 
@@ -71,7 +114,6 @@ function drawNumber(){
     console.log("CHARS",chars);
     var real_chars = basic_chars.map(function(d,i){
         var pos = (cifras - i) - 1;
-        //console.log("INDEX",cifras,i,pos,chars.length);
         if((pos)<chars.length){
             return chars[pos];
         }
@@ -100,8 +142,6 @@ function drawNumber(){
             drawCompleteGiffer();
         });
 
-
-
 }
 
 function drawCompleteGiffer(){
@@ -110,7 +150,7 @@ function drawCompleteGiffer(){
 
     var giffer_html = '<div id="photo-container"></div>';
 
-    giffer_html += '<div id="giffer-container"><table id="giffer-container-table"><tr>';
+    /*giffer_html += '<div id="giffer-container"><table id="giffer-container-table"><tr>';
 
     //var images = ["data/images/vota.svg","data/images/vota.svg","data/images/vota.svg","data/images/vota.svg","data/images/vota.svg","data/images/vota.svg"];
     var images = ["data/images/YoSoyAlcalde.gif","data/images/YoSoyAlcalde.gif","data/images/YoSoyAlcalde.gif","data/images/YoSoyAlcalde.gif","data/images/YoSoyAlcalde.gif","data/images/YoSoyAlcalde.gif"];
@@ -124,17 +164,20 @@ function drawCompleteGiffer(){
         giffer_html += '<td><img src="'+d+'"></td>';
 
     });
-    giffer_html += '</div>';
+    giffer_html += '</div>';*/
 
     container.html(giffer_html);
     var photo_html = "";
 
-    photo_html += '<span id="photo-uploader">Subir foto para el gif</span>';
+    photo_html += '<div id="photo-msg"><span class="photo-msg-text" id="photo-msg-text">PARA HACERTE ALCALDE/SA EN MADRID LO TIENES MUY FÁCIL. PUEDES VOTAR EN DECIDE.MADRID Y AQUÍ PUEDES HACERTE UN </span><span class="photo-msg-text" id="photo-msg-text-mark">GIF PERSONALIZADO</span></div>';
+    photo_html += '<img class="svg-obj" id="seleccionar-archivo" src="data/images/seleccionar_archivo.svg" />';
+    photo_html += '<div id="generated-gif-container"></div>';
+    /*photo_html += '<span id="photo-uploader">Subir foto para el gif</span>';
     photo_html += '<input type="file" id="imageLoader" name="imageLoader"/><canvas id="imageCanvas"></canvas>';
     var input = $( "input:file" ).css({
         background: "yellow",
           border: "3px red solid"
-    });
+    });*/
 
     $("#photo-container").html(photo_html);
 
@@ -197,4 +240,9 @@ function handleImage(e){
 
 $(document).ready(function(){
     drawMain();
+    window.setInterval(function(){
+        $(".title").css("opacity",function(i,d){
+            return 1.0 - d;
+        });
+    },4000);
 });
