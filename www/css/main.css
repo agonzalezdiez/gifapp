@@ -113,8 +113,22 @@ body{
 }
 #gif-result{
     position: absolute;
-    left: 40%;
+    /*left: 40%;*/
+    position: absolute;
+    left: 50%;
+    top: 60%;
 }
 .croppie-container .cr-boundary {
     z-index: 0 !important;
+}
+#result-container{
+    position: absolute;
+    top: 25%;
+    left: 14%;
+    width: 60%;
+    font-size: 30px;
+    margin-top: 5%;
+}
+#rrss-result{
+    margin-top: 6%;
 }

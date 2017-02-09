@@ -22,7 +22,6 @@ function drawMain(){
 
     });
     giffer_html += '</div>';
-    //console.log("GIFFFER",giffer_html);
 
     container = $("#main-container");
     footer = $("#footer-container");
@@ -95,8 +94,6 @@ function drawMain(){
 
     drawNumber();
 
-    //console.log("VOTA",$("#vota"));
-
 }
 
 function drawNumber(){
@@ -111,10 +108,8 @@ function drawNumber(){
     }
 
     $("#counter-value").css("left",function(){
-        //console.log("SETEO LEFT",general_margins[chars.length-1]);
         return general_margins[chars.length-1]+"px";
     });
-    //console.log("CHARS",chars);
     var real_chars = basic_chars.map(function(d,i){
         var pos = (cifras - i) - 1;
         if((pos)<chars.length){
@@ -172,7 +167,8 @@ function drawCompleteGiffer(){
     container.html(giffer_html);
     var photo_html = "";
 
-    photo_html += '<div id="photo-msg"><span class="photo-msg-text" id="photo-msg-text">PARA HACERTE ALCALDE/SA EN MADRID LO TIENES MUY FÁCIL. PUEDES VOTAR EN DECIDE.MADRID Y AQUÍ PUEDES HACERTE UN </span><span class="photo-msg-text" id="photo-msg-text-mark">GIF PERSONALIZADO</span></div>';
+    photo_html += '<div id="photo-msg"><span class="photo-msg-text" id="photo-msg-text">PARA HACERTE ALCALDE/ALCALDESA DE MADRID, LO TIENES FÁCIL. PUEDES VOTAR EN <span class="photo-msg-text" id="photo-msg-text-mark">HTTPS://DECIDE.MADRID.ES/VOTA</span> <span class="photo-msg-text" id="photo-msg-text">LAS DOS PROPUESTAS CIUDADANAS Y </span><span  class="photo-msg-text" id="photo-msg-text-mark">HACERTE UN GIF PERSONALIZADO</span><span class="photo-msg-text" id="photo-msg-text">. GANE LO QUE GANE, GANA LA DEMOCRACIA DIRECTA. GANAN LOS DE ABAJO.</span></div>';
+    //photo_html += '<div id="photo-msg"><span class="photo-msg-text" id="photo-msg-text">PARA HACERTE ALCALDE/SA EN MADRID LO TIENES MUY FÁCIL. PUEDES VOTAR EN DECIDE.MADRID Y AQUÍ PUEDES HACERTE UN </span><span class="photo-msg-text" id="photo-msg-text-mark">GIF PERSONALIZADO</span></div>';
     //photo_html += '<img class="svg-obj" id="seleccionar-archivo" src="data/images/seleccionar_archivo.svg" />';
     photo_html += '<div id="generated-gif-container"></div>';
     //photo_html += '<span id="photo-uploader">Subir foto para el gif</span>';
@@ -195,6 +191,45 @@ function drawCompleteGiffer(){
             $("#cropping-done-btn").remove(); 
         }, false);
         imageLoader.addEventListener('change', handleImage, false);
+}
+
+function drawResult(url){
+
+    container.html('<div id="result-container"></div>');
+
+    var result_html = "";
+
+    result_html += '<span id="result-msg">AQUÍ TIENES LA PRUEBA DE QUE ERES ALCALDE. RECUERDA QUE PUEDES VOTAR EN HTTPS://DECIDE.MADRID.ES/VOTA LAS DOS PROPUESTAS CIUDADANAS. Y AHORA ¡COMPARTE!</span>';
+
+    result_html += '<div id="rrss-result">';
+    result_html += '<img class="share-result svg-obj" id="share-result-tw" src="data/images/compartir_tw.svg" />';
+    result_html += '<img class="share-result svg-obj" id="share-result-fb" src="data/images/compartir_fb.svg" />';
+    result_html += '<img class="share-result svg-obj" id="share-result-link" src="data/images/compartir_link.svg" />';
+    result_html += '</div>';
+
+    result_html += '<div id="gif-result">';
+    result_html += '<img src="'+url+'"/>';
+
+    result_html += '</div>';
+
+    $("#result-container").html(result_html);
+
+    $(".share-result").on("click",function(d){
+        var type = this.id.split('-')[2];
+        if(type=="tw"){
+            window.open("http://twitter.com/share?text=text goes here&url=http://url goes here&hashtags=hashtag1,hashtag2,hashtag3","_blank");
+
+        }else if(type="fb"){
+            window.open("https://www.facebook.com/sharer/sharer.php?u=http%3A//loquesea.org","_blank");
+
+        }else if(type="link"){
+
+        }
+        else{
+
+        }
+    });
+
 }
 
 function generateGif(new_image){
@@ -223,7 +258,7 @@ function generateGif(new_image){
     gif.on('finished', function(blob) {
         url = window.URL.createObjectURL(blob);
         $("#cropping-done-btn").remove();
-        $("#photo-container").append('<img id="gif-result" src="'+url+'"/>');
+        //$("#photo-container").append('<img id="gif-result" src="'+url+'"/>');
         window.open(url,"_blank");
         var a = document.createElement("a");
             document.body.appendChild(a);
@@ -232,6 +267,7 @@ function generateGif(new_image){
             a.download = "YoSoyAlcalde.gif";
             a.click();
         //window.URL.revokeObjectURL(url);
+        drawResult(url);
     });
     gif.render();
 
@@ -302,6 +338,8 @@ function handleImage(e){
 
 $(document).ready(function(){
     drawMain();
+    //drawResult();
+
     window.setInterval(function(){
         $(".title").css("opacity",function(i,d){
             return 1.0 - d;
