@@ -92,13 +92,29 @@ body{
 }
 #photo-container{
     position: absolute;
-    top: 44%;
+    top: 35%;
 }
 #seleccionar-archivo{
+    cursor: pointer;
     position: absolute;
     left: 6%;
     top: 70%;
 }
 #imageLoader{
     display: none;
+}
+#uploaded-img-container {
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    left: 45%;
+    top: 55%;
+    z-index: 0 !important;
+}
+#gif-result{
+    position: absolute;
+    left: 40%;
+}
+.croppie-container .cr-boundary {
+    z-index: 0 !important;
 }

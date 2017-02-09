@@ -1,4 +1,4 @@
-var Demo = (function() {
+var Demo = (function(file) {
 
 	function output(node) {
 		var existing = $('#result .croppie-result');
@@ -142,6 +142,7 @@ var Demo = (function() {
 	            
 	            reader.onload = function (e) {
 					$('.upload-demo').addClass('ready');
+
 	            	$uploadCrop.croppie('bind', {
 	            		url: e.target.result
 	            	}).then(function(){
@@ -213,12 +214,12 @@ var Demo = (function() {
 	}
 
 	function init() {
-		bindNavigation();
-		demoMain();
-		demoBasic();	
-		demoVanilla();	
+		//bindNavigation();
+		//demoMain();
+		//demoBasic();	
+		//demoVanilla();	
 		demoUpload();
-		demoHidden();
+		//demoHidden();
 	}
 
 	return {

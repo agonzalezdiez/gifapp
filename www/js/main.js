@@ -3,6 +3,7 @@
 var container;
 var footer;
 var header;
+var rrss;
 
 
 function drawMain(){
@@ -21,11 +22,12 @@ function drawMain(){
 
     });
     giffer_html += '</div>';
-    console.log("GIFFFER",giffer_html);
+    //console.log("GIFFFER",giffer_html);
 
     container = $("#main-container");
     footer = $("#footer-container");
     header = $("#header-container");
+    rrss = $("#rrss-container");
 
     var header_html = "";
     header_html += '<div id="title-container">';
@@ -70,14 +72,15 @@ function drawMain(){
       //container_html += '<object class="svg-obj" id="hazte-alcalde-sa" data="data/images/hazte_alcalde_sa.svg" type="image/svg+xml"></object>';
     container_html += '</div>';
 
-
-
-    container_html += '<div id="rrss-container">';
-    container_html += '<object class="svg-obj" id="logo_twitter" data="data/images/logo_twitter.svg" type="image/svg+xml"></object>';
-    container_html += '<object class="svg-obj" id="logo_fb" data="data/images/logo_fb.svg" type="image/svg+xml"></object>';
-    container_html += '</div>';
-
     container.html(container_html);
+
+    var rrss_html = "";
+    rrss_html += '<div id="rrss-container">';
+    rrss_html += '<object class="svg-obj" id="logo_twitter" data="data/images/logo_twitter.svg" type="image/svg+xml"></object>';
+    rrss_html += '<object class="svg-obj" id="logo_fb" data="data/images/logo_fb.svg" type="image/svg+xml"></object>';
+    rrss_html += '</div>';
+
+    rrss.html(rrss_html);
 
     //FOOTER
     var footer_html = '';
@@ -108,10 +111,10 @@ function drawNumber(){
     }
 
     $("#counter-value").css("left",function(){
-        console.log("SETEO LEFT",general_margins[chars.length-1]);
+        //console.log("SETEO LEFT",general_margins[chars.length-1]);
         return general_margins[chars.length-1]+"px";
     });
-    console.log("CHARS",chars);
+    //console.log("CHARS",chars);
     var real_chars = basic_chars.map(function(d,i){
         var pos = (cifras - i) - 1;
         if((pos)<chars.length){
@@ -179,13 +182,18 @@ function drawCompleteGiffer(){
         opacity: 0.000001,
         border: "3px red solid"
     });
-    photo_html += '<label for="imageLoader" class="custom-file-upload"><img class="svg-obj" id="seleccionar-archivo" src="data/images/seleccionar_archivo.svg" /></label>';
+    photo_html += '<label for="imageLoader" class="custom-file-upload"><img class="svg-obj" id="seleccionar-archivo" src="data/images/seleccionar_archivo.svg" />';
 
     //.css("background-image",'url("data/images/seleccionar_archivo.svg")');
 
     $("#photo-container").html(photo_html);
 
     var imageLoader = document.getElementById('imageLoader');
+        imageLoader.addEventListener('click', function(){ 
+            $("#uploaded-img-container").remove();
+            $("#gif-result").remove(); 
+            $("#cropping-done-btn").remove(); 
+        }, false);
         imageLoader.addEventListener('change', handleImage, false);
 }
 
@@ -198,23 +206,24 @@ function generateGif(new_image){
     var images = ['../data/01_losdeabajo.png','../data/02_losdeabajo.png','../data/03_losdeabajo.png','../data/04_losdeabajo.png','../data/05_losdeabajo.png','../data/06_losdeabajo.png','../data/07_losdeabajo.png','../data/08_losdeabajo.png'];
 
     images.forEach(function(imageElement,i){
-        console.log("AAA",i);
+        //console.log("AAA",i);
         var img = new Image(300,300);
         if(i!=2){
             img.src = imageElement;
         }
         else{
             img.src = new_image;
-            console.log("IMAGE",img.src);
+            //console.log("IMAGE",img.src);
         }
         img.style.width = '300px';
         img.style.height = 'auto';
-        console.log("IMG",img);
+        //console.log("IMG",img);
         gif.addFrame(img);
     });
     gif.on('finished', function(blob) {
-        console.log("FINISHED",blob);
         url = window.URL.createObjectURL(blob);
+        $("#cropping-done-btn").remove();
+        $("#photo-container").append('<img id="gif-result" src="'+url+'"/>');
         window.open(url,"_blank");
         var a = document.createElement("a");
             document.body.appendChild(a);
@@ -222,7 +231,7 @@ function generateGif(new_image){
             a.href = url;
             a.download = "YoSoyAlcalde.gif";
             a.click();
-        window.URL.revokeObjectURL(url);
+        //window.URL.revokeObjectURL(url);
     });
     gif.render();
 
@@ -236,7 +245,56 @@ function handleImage(e){
     var fileUploaded;
 
     reader.onload = function(event){
-        generateGif(event.target.result,"aaaaa.png");
+        /*var img = new Image();
+        img.onload = function(){
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.drawImage(img,0,0);
+        };
+        img.src = event.target.result;
+        */
+        
+        //generateGif(event.target.result,"aaaaa.png");
+        //populateImg(event.target.result);
+        //$("#photo-container").append('<img id="uploaded-img" src="'+event.target.result+'"/>');
+        $("#photo-container").append('<div id="uploaded-img-container"></div>');
+        //var opts = {"boundary":"#uploaded-img-container","enableZoom":true};
+        //$("#uploaded-img").croppie(opts);
+        //$('#item').croppie(opts);
+
+        //console.log("URL TMP",event.target);
+
+        //url_tmp = window.URL.createObjectURL(event.target.result);
+
+    };
+
+    reader.onloadend = function(event){
+
+        //console.log("EVENT",event.target.result);
+        $("#photo-container").append('<span id="cropping-done-btn">Listo!</span>');
+
+        var basic = $('#uploaded-img-container').croppie({
+            viewport: {
+                width: 150,
+                height: 200
+            },
+            enableZoom: true
+        });
+        basic.croppie('bind', {
+            url: event.target.result,
+            //url: "data/cat.jpg",
+            points: [77, 469, 280, 739]
+        });
+
+        $("#cropping-done-btn")
+            .css("cursor","pointer")
+            .on("click",function(d){
+                basic.croppie('result').then(function(result){
+                    generateGif(result,"aa.png");
+                    basic.croppie("destroy");
+                });
+            });
+
     };
 
     fileUploaded = reader.readAsDataURL(e.target.files[0]);     
