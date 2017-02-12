@@ -18,7 +18,7 @@ function drawMain(){
         if(i%columns===0){
             giffer_html += '</tr><tr>';
         }
-        giffer_html += '<td><img src="'+d+'"></td>';
+        giffer_html += '<td><img class="gifs-home" src="'+d+'"></td>';
 
     });
     giffer_html += '</div>';
@@ -64,9 +64,15 @@ function drawMain(){
       container_html += '</div>';
       container_html += '<div class="counter-texts" id="post-counter"><object id="alcaldesas" data="data/images/alcaldesas.svg" type="image/svg+xml"></object></div>';
     container_html += '</div>';
+    container_html += '<div id="home-msg"><span class="home-msg-text" id="photo-msg-text">PARA HACERTE ALCALDE/ALCALDESA DE MADRID, LO TIENES FÁCIL. PUEDES VOTAR EN <span class="photo-msg-text" id="photo-msg-text-mark">HTTPS://DECIDE.MADRID.ES/VOTA</span> <span class="photo-msg-text" id="photo-msg-text">LAS DOS PROPUESTAS CIUDADANAS Y </span><span  class="photo-msg-text" id="photo-msg-text-mark">HACERTE UN GIF PERSONALIZADO</span><span class="photo-msg-text" id="photo-msg-text">. GANE LO QUE GANE, GANA LA DEMOCRACIA DIRECTA. GANAN LOS DE ABAJO.</span></div>';
     container_html += '<div id="gifer-container">';
       container_html += '<img class="svg-obj" id="hazte-alcalde-sa" src="data/images/hazte_alcalde_sa.svg" />';
-      container_html += '<img class="svg-obj" id="descarga_materiales" src="data/images/descarga_materiales.svg" />';
+      container_html += '<img class="svg-obj" id="descarga_tu_chapa" src="data/images/descarga_tu_chapa.svg" />';
+      container_html += '<div id="chapas-container""><img class="svg-obj" id="chapa_alcaldesa" src="data/images/chapa_alcaldesa.svg" />';
+      container_html += '<img class="svg-obj" id="chapa_alcalde" src="data/images/chapa_alcalde.svg" />';
+      container_html += '<img class="svg-obj" id="chapa_alcaldesa" src="data/images/chapa_alcaldesa.svg" />';
+      container_html += '<img class="svg-obj" id="chapa_alcalde" src="data/images/chapa_alcalde.svg" />';
+      container_html += '</div>';
       container_html += giffer_html;
       //container_html += '<object class="svg-obj" id="hazte-alcalde-sa" data="data/images/hazte_alcalde_sa.svg" type="image/svg+xml"></object>';
     container_html += '</div>';
@@ -85,7 +91,7 @@ function drawMain(){
     var footer_html = '';
 
     footer_html += '<div id="footer">';
-    footer_html += '<span id="footer-msg">Lorem fistrum sexuarl eiusmod fistro. Reprehenderit apetecan sit amet quietooor ese que llega et llevame al sircoo. Ullamco dolore torpedo labore. No te digo trigo por no llamarte Rodrigor ese hombree mamaar la caidita pupita exercitation duis quis hasta luego Lucas esse tiene musho peligro. A gramenawer de la pradera elit me cago en tus muelas diodenoo a peich no puedor sexuarl ex</span>';
+    footer_html += '<span id="footer-msg">Esta web es una iniciativa de lacocTELLera, un grupo de trabajo de Medial-prado de Madrid. Es una campaña de la sociedad civil, totalmente independiente. La idea surgió en el encuentro #cócTELL de narrativas de la participación.</span>';
     footer_html += '<span id="footer-twitter">API TWITTER</span>';
     footer_html += '';
     footer_html += '</div>';
@@ -140,6 +146,15 @@ function drawNumber(){
             drawCompleteGiffer();
         });
 
+    $("#descarga_tu_chapa")
+        .on("click",function(d){
+            var a = document.createElement("a");
+                document.body.appendChild(a);
+                a.style = "display: none";
+                a.href = "data/chapas.zip";
+                a.download = "chapas.zip";
+                a.click();
+        });
 }
 
 function drawCompleteGiffer(){
@@ -199,7 +214,7 @@ function drawResult(url){
 
     var result_html = "";
 
-    result_html += '<span id="result-msg">AQUÍ TIENES LA PRUEBA DE QUE ERES ALCALDE. RECUERDA QUE PUEDES VOTAR EN HTTPS://DECIDE.MADRID.ES/VOTA LAS DOS PROPUESTAS CIUDADANAS. Y AHORA ¡COMPARTE!</span>';
+    result_html += '<span id="result-msg">AQUÍ TIENES LA PRUEBA DE QUE ERES ALCALDE. RECUERDA QUE PUEDES VOTAR EN </span><span id="result-msg-mark">HTTPS://DECIDE.MADRID.ES/VOTA</span><span id="result-msg"> LAS DOS PROPUESTAS CIUDADANAS. Y AHORA </span><span id="result-msg-mark">¡COMPARTE!</span>';
 
     result_html += '<div id="rrss-result">';
     result_html += '<img class="share-result svg-obj" id="share-result-tw" src="data/images/compartir_tw.svg" />';
@@ -223,10 +238,7 @@ function drawResult(url){
             window.open("https://www.facebook.com/sharer/sharer.php?u=http%3A//loquesea.org","_blank");
 
         }else if(type="link"){
-
-        }
-        else{
-
+            
         }
     });
 
@@ -238,7 +250,7 @@ function generateGif(new_image){
         quality: 10
     });
 
-    var images = ['../data/01_losdeabajo.png','../data/02_losdeabajo.png','../data/03_losdeabajo.png','../data/04_losdeabajo.png','../data/05_losdeabajo.png','../data/06_losdeabajo.png','../data/07_losdeabajo.png','../data/08_losdeabajo.png'];
+    var images = ['data/01_losdeabajo.png','data/02_losdeabajo.png','data/03_losdeabajo.png','data/04_losdeabajo.png','data/05_losdeabajo.png','data/06_losdeabajo.png','data/07_losdeabajo.png','data/08_losdeabajo.png'];
 
     images.forEach(function(imageElement,i){
         //console.log("AAA",i);
@@ -253,7 +265,7 @@ function generateGif(new_image){
         img.style.width = '300px';
         img.style.height = 'auto';
         //console.log("IMG",img);
-        gif.addFrame(img);
+        gif.addFrame(img ,{delay: 1000});
     });
     gif.on('finished', function(blob) {
         url = window.URL.createObjectURL(blob);
