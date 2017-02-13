@@ -4,7 +4,16 @@ var container;
 var footer;
 var header;
 var rrss;
+var mobile = false;
+var buttons_left = "15%";
 
+var msg_top = "75%";
+var msg_left = "14%";
+var gifer_cont_top = "110%";
+var chapas_left = "-10%";
+
+var table_right = "16%";
+var title_left = "40%";
 
 function drawMain(){
 
@@ -70,8 +79,10 @@ function drawMain(){
       container_html += '<img class="svg-obj" id="descarga_tu_chapa" src="data/images/descarga_tu_chapa.svg" />';
       container_html += '<div id="chapas-container""><img class="svg-obj" id="chapa_alcaldesa" src="data/images/chapa_alcaldesa.svg" />';
       container_html += '<img class="svg-obj" id="chapa_alcalde" src="data/images/chapa_alcalde.svg" />';
-      container_html += '<img class="svg-obj" id="chapa_alcaldesa" src="data/images/chapa_alcaldesa.svg" />';
-      container_html += '<img class="svg-obj" id="chapa_alcalde" src="data/images/chapa_alcalde.svg" />';
+      if(!mobile){
+          container_html += '<img class="svg-obj" id="chapa_alcaldesa" src="data/images/chapa_alcaldesa.svg" />';
+          container_html += '<img class="svg-obj" id="chapa_alcalde" src="data/images/chapa_alcalde.svg" />';
+      }
       container_html += '</div>';
       container_html += giffer_html;
       //container_html += '<object class="svg-obj" id="hazte-alcalde-sa" data="data/images/hazte_alcalde_sa.svg" type="image/svg+xml"></object>';
@@ -155,6 +166,21 @@ function drawNumber(){
                 a.download = "chapas.zip";
                 a.click();
         });
+
+    console.log("AAAAAAAAA",buttons_left);
+    $("#gifer-container").css("left",buttons_left);
+    $("#home-msg").css("top",msg_top);
+
+    $("#home-msg").css("left",msg_left);
+       // top: 30%;
+         //   left: 21%;
+    //   // 75 14
+    /*if(mobile){
+    }*/
+   $("#gifer-container").css("top",gifer_cont_top);
+   $("#chapas-container").css("margin-left",chapas_left);
+   $("#giffer-container-table").css("right",table_right);
+   $(".title").css("left",title_left);
 }
 
 function drawCompleteGiffer(){
@@ -253,7 +279,7 @@ function generateGif(new_image){
     var images = ['data/01_losdeabajo.png','data/02_losdeabajo.png','data/03_losdeabajo.png','data/04_losdeabajo.png','data/05_losdeabajo.png','data/06_losdeabajo.png','data/07_losdeabajo.png','data/08_losdeabajo.png'];
 
     images.forEach(function(imageElement,i){
-        //console.log("AAA",i);
+        console.log("AAA",i);
         var img = new Image(300,300);
         if(i!=2){
             img.src = imageElement;
@@ -349,6 +375,20 @@ function handleImage(e){
 }
 
 $(document).ready(function(){
+
+    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+        console.log("MOVIL");
+        mobile = true;
+        $(".svg-obj").css("transform","scale(0.4)");
+        buttons_left = "6%";
+        msg_top = "30%";
+        msg_left = "15%";
+        gifer_cont_top = "45%";
+        chapas_left = "17%";
+        table_right = "0%";
+        title_left= "25%";
+    }
+
     drawMain();
     //drawResult();
 
