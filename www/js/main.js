@@ -115,36 +115,44 @@ function drawMain(){
 
 function drawNumber(){
     var number = 12345678;
-    var cifras = 8;
-    var basic_chars = ['','','','','','','',''];
-    var general_margins = ['281','248','211','178','142','106','71','37'];
 
-    var chars = (""+number+"").split('').reverse();
-    if(chars.length>cifras){
-        return "";
-    }
+    $.get("https://somosalcaldesas.org/api/counter",function(d){
 
-    $("#counter-value").css("left",function(){
-        return general_margins[chars.length-1]+"px";
-    });
-    var real_chars = basic_chars.map(function(d,i){
-        var pos = (cifras - i) - 1;
-        if((pos)<chars.length){
-            return chars[pos];
+        number = d.count;
+        console.log("AAAAA",d);
+
+        var cifras = 8;
+        var basic_chars = ['','','','','','','',''];
+        var general_margins = ['281','248','211','178','142','106','71','37'];
+
+        var chars = (""+number+"").split('').reverse();
+        if(chars.length>cifras){
+            return "";
         }
-        else{
-            return d;
-        }
-    });
 
-    var margins = ['36','35','83','35','36','80','38','0'];
-    
-    real_chars.reverse().forEach(function(d,i){
-        var pos = i;
-        $("#counter-value-"+pos).text(d)
-            .css("padding-left",function(){
-                return margins[i]+"px";
-            });
+        $("#counter-value").css("left",function(){
+            return general_margins[chars.length-1]+"px";
+        });
+        var real_chars = basic_chars.map(function(d,i){
+            var pos = (cifras - i) - 1;
+            if((pos)<chars.length){
+                return chars[pos];
+            }
+            else{
+                return d;
+            }
+        });
+
+        var margins = ['36','35','83','35','36','80','38','0'];
+        
+        real_chars.reverse().forEach(function(d,i){
+            var pos = i;
+            $("#counter-value-"+pos).text(d)
+                .css("padding-left",function(){
+                    return margins[i]+"px";
+                });
+        });
+
     });
     $("#vota")
         .css("cursor","pointer")
@@ -294,6 +302,9 @@ function generateGif(new_image){
         gif.addFrame(img ,{delay: 1000});
     });
     gif.on('finished', function(blob) {
+        $.post("https://somosalcaldesas.org/api/counter/","",function(d){
+            console.log("CONTADO ");
+        });
         url = window.URL.createObjectURL(blob);
         $("#cropping-done-btn").remove();
         //$("#photo-container").append('<img id="gif-result" src="'+url+'"/>');
@@ -345,7 +356,7 @@ function handleImage(e){
     reader.onloadend = function(event){
 
         //console.log("EVENT",event.target.result);
-        $("#photo-container").append('<span id="cropping-done-btn">Listo!</span>');
+        $("#photo-container").append('<span id="cropping-done-btn">GENERAR GIF</span>');
 
         var basic = $('#uploaded-img-container').croppie({
             viewport: {
@@ -365,6 +376,15 @@ function handleImage(e){
             .on("click",function(d){
                 basic.croppie('result').then(function(result){
                     generateGif(result,"aa.png");
+                    console.log("RES",result);
+                    /*var url = window.URL.createObjectURL(result);
+                    var a = document.createElement("a");
+                        document.body.appendChild(a);
+                        a.style = "display: none";
+                        a.href = url;
+                        a.download = "YoSoyAlcalde.gif";
+                        a.click();
+                        */
                     basic.croppie("destroy");
                 });
             });
