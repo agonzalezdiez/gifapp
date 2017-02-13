@@ -10,7 +10,7 @@ var buttons_left = "15%";
 var msg_top = "40%";
 var msg_left = "14%";
 var gifer_cont_top = "55%";
-var chapas_left = "-1%";
+var chapas_left = "1%";
 
 var table_right = "16%";
 var title_left = "40%";
@@ -84,8 +84,8 @@ function drawMain(){
           container_html += '<img class="svg-obj" id="chapa-alcalde" src="data/images/chapa_alcalde.svg" />';
       }
       else{
-          container_html += '<img class="svg-obj-small" id="chapa-gif" src="data/images/YoSoyAlcalde.gif" />';
-          container_html += '<img class="svg-obj-small" id="chapa-gif" src="data/images/YoSoyAlcalde.gif" />';
+          container_html += '<img class="svg-obj-xsmall" id="chapa-gif" src="data/images/YoSoyAlcalde.gif" />';
+          container_html += '<img class="svg-obj-xsmall" id="chapa-gif" src="data/images/YoSoyAlcalde.gif" />';
           container_html += '<img class="svg-obj" id="chapa-alcaldesa" src="data/images/chapa_alcaldesa.svg" />';
           container_html += '<img class="svg-obj" id="chapa-alcalde" src="data/images/chapa_alcalde.svg" />';
       }
@@ -128,7 +128,6 @@ function drawNumber(){
     $.get("https://somosalcaldesas.org/api/counter",function(d){
 
         number = d.count;
-        console.log("AAAAA",d);
 
         var cifras = 8;
         var basic_chars = ['','','','','','','',''];
@@ -177,7 +176,6 @@ function drawNumber(){
     $("#descarga_tu_chapa")
         .on("click",function(d){
             $.post("https://somosalcaldesas.org/api/counter/","",function(d){
-                console.log("CONTADO ");
             });
             var a = document.createElement("a");
                 document.body.appendChild(a);
@@ -187,7 +185,6 @@ function drawNumber(){
                 a.click();
         });
 
-    console.log("AAAAAAAAA",buttons_left);
     $("#gifer-container").css("left",buttons_left);
     $("#home-msg").css("top",msg_top);
 
@@ -204,7 +201,6 @@ function drawNumber(){
 
 
    $(".share-home").on("click",function(){
-        console.log("CLICK");
         var type = this.id.split('-')[2];
         if(type=="tw"){
             window.open("http://twitter.com/share?text=Yo ya soy alcaldesa. Tú también puedes serlo en &hashtags=SomosAlcaldesas&url=http://somosalcaldesas.org","_blank");
@@ -309,22 +305,26 @@ function generateGif(new_image){
         quality: 10
     });
 
-    var images = ['data/01_losdeabajo.png','data/02_losdeabajo.png','data/03_losdeabajo.png','data/04_losdeabajo.png','data/05_losdeabajo.png','data/06_losdeabajo.png','data/07_losdeabajo.png','data/08_losdeabajo.png'];
+    var images = ['','','','','data/01_losdeabajo.png','data/02_losdeabajo.png','data/03_losdeabajo.png','data/04_losdeabajo.png','data/05_losdeabajo.png','data/06_losdeabajo.png','data/07_losdeabajo.png','data/08_losdeabajo.png', 'data/09_losdeabajo.png', 'data/10_losdeabajo.png'];
 
     images.forEach(function(imageElement,i){
-        console.log("AAA",i);
-        var img = new Image(300,300);
-        if(i!=2){
-            img.src = imageElement;
+        var img = new Image(320,320);
+        if(i>3){
+            if(i!=6){
+                img.src = imageElement;
+                img.style.width = '300px';
+                img.style.height = '300px';
+            }
+            else{
+                img.src = new_image;
+            }
+            //img.style.width = '300px';
+            //img.style.height = 'auto';
+            gif.addFrame(img ,{delay: 1000});
         }
         else{
-            img.src = new_image;
-            //console.log("IMAGE",img.src);
+            gif.addFrame(img ,{delay: 1});
         }
-        img.style.width = '300px';
-        img.style.height = 'auto';
-        //console.log("IMG",img);
-        gif.addFrame(img ,{delay: 1000});
     });
     gif.on('finished', function(blob) {
         $.post("https://somosalcaldesas.org/api/counter/","",function(d){
@@ -401,7 +401,6 @@ function handleImage(e){
             .on("click",function(d){
                 basic.croppie('result').then(function(result){
                     generateGif(result,"aa.png");
-                    console.log("RES",result);
                     /*var url = window.URL.createObjectURL(result);
                     var a = document.createElement("a");
                         document.body.appendChild(a);
@@ -422,7 +421,6 @@ function handleImage(e){
 $(document).ready(function(){
 
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-        console.log("MOVIL");
         mobile = true;
         $(".svg-obj").css("transform","scale(0.4)");
         buttons_left = "6%";
