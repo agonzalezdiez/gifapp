@@ -98,8 +98,11 @@ function drawMain(){
 
     var rrss_html = "";
     rrss_html += '<div id="rrss-container">';
-    rrss_html += '<object class="svg-obj" id="logo_twitter" data="data/images/logo_twitter.svg" type="image/svg+xml"></object>';
-    rrss_html += '<object class="svg-obj" id="logo_fb" data="data/images/logo_fb.svg" type="image/svg+xml"></object>';
+    //<img class="svg-obj" id="hazte-alcalde-sa" src="data/images/hazte_alcalde_sa.svg" />
+    rrss_html += '<img class="svg-obj share-home" id="share-home-tw" src="data/images/logo_twitter.svg" />';
+    rrss_html += '<img class="svg-obj share-home" id="share-home-fb" src="data/images/logo_fb.svg" />';
+    //rrss_html += '<object class="svg-obj share-home" id="share-home-tw" data="data/images/logo_twitter.svg" type="image/svg+xml"></object>';
+    //rrss_html += '<object class="svg-obj share-home" id="share-home-fb" data="data/images/logo_fb.svg" type="image/svg+xml"></object>';
     rrss_html += '</div>';
 
     rrss.html(rrss_html);
@@ -198,6 +201,19 @@ function drawNumber(){
    $("#chapas-container").css("margin-left",chapas_left);
    $("#giffer-container-table").css("right",table_right);
    $(".title").css("left",title_left);
+
+
+   $(".share-home").on("click",function(){
+        console.log("CLICK");
+        var type = this.id.split('-')[2];
+        if(type=="tw"){
+            window.open("http://twitter.com/share?text=Yo ya soy alcaldesa. Tú también puedes serlo en &hashtags=SomosAlcaldesas&url=http://somosalcaldesas.org","_blank");
+
+        }else if(type=="fb"){
+            window.open("https://www.facebook.com/sharer/sharer.php?u=http://somosalcaldesas.org","_blank");
+
+        }
+   });
 }
 
 function drawCompleteGiffer(){
@@ -277,10 +293,10 @@ function drawResult(url){
         if(type=="tw"){
             window.open("http://twitter.com/share?text=Yo ya soy alcaldesa. Tú también puedes serlo en &hashtags=SomosAlcaldesas&url=http://somosalcaldesas.org","_blank");
 
-        }else if(type="fb"){
+        }else if(type=="fb"){
             window.open("https://www.facebook.com/sharer/sharer.php?u=http://somosalcaldesas.org","_blank");
 
-        }else if(type="link"){
+        }else if(type=="link"){
             
         }
     });
@@ -419,7 +435,7 @@ $(document).ready(function(){
     }
 
     drawMain();
-    drawResult();
+    //drawResult();
 
     window.setInterval(function(){
         $(".title").css("opacity",function(i,d){
