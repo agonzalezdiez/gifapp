@@ -7,10 +7,10 @@ var rrss;
 var mobile = false;
 var buttons_left = "15%";
 
-var msg_top = "75%";
+var msg_top = "40%";
 var msg_left = "14%";
-var gifer_cont_top = "110%";
-var chapas_left = "-10%";
+var gifer_cont_top = "55%";
+var chapas_left = "-1%";
 
 var table_right = "16%";
 var title_left = "40%";
@@ -39,10 +39,10 @@ function drawMain(){
 
     var header_html = "";
     header_html += '<div id="title-container">';
-      header_html += '<div id="logo-left"><object class="svg-obj" id="los-de-abajo" data="data/images/los_de_abajo.svg" type="image/svg+xml"></object></div>';
+      header_html += '<div id="logo-left"><object class="svg-obj-small" id="los-de-abajo" data="data/images/los_de_abajo.svg" type="image/svg+xml"></object></div>';
       header_html += '<div class="title" id="title1">MADRID 100% SOSTENIBLE>>>>></div>';
       header_html += '<div class="title" id="title2" style="opacity:0.000001;">BILLETE ÚNICO>>>>></div>';
-      header_html += '<div id="participa-logo"><img class="svg-obj" id="vota" src="data/images/vota.svg"/></div>';
+      header_html += '<div id="participa-logo"><img class="svg-obj-small" id="vota" src="data/images/vota.svg"/></div>';
     header_html += '</div>';
 
     header.html(header_html);
@@ -71,15 +71,21 @@ function drawMain(){
         container_html += '</div>';
         container_html += '<object class="svg-obj" id="lineas-contador" data="data/images/lineas_contador.svg" type="image/svg+xml"></object>';
       container_html += '</div>';
-      container_html += '<div class="counter-texts" id="post-counter"><object id="alcaldesas" data="data/images/alcaldesas.svg" type="image/svg+xml"></object></div>';
+      container_html += '<div class="counter-texts" id="post-counter"><object class="svg-obj" id="alcaldesas" data="data/images/alcaldesas.svg" type="image/svg+xml"></object></div>';
     container_html += '</div>';
-    container_html += '<div id="home-msg"><span class="home-msg-text" id="photo-msg-text">PARA HACERTE ALCALDE/ALCALDESA DE MADRID, LO TIENES FÁCIL. PUEDES VOTAR EN <span class="photo-msg-text" id="photo-msg-text-mark">HTTPS://DECIDE.MADRID.ES/VOTA</span> <span class="photo-msg-text" id="photo-msg-text">LAS DOS PROPUESTAS CIUDADANAS Y </span><span  class="photo-msg-text" id="photo-msg-text-mark">HACERTE UN GIF PERSONALIZADO</span><span class="photo-msg-text" id="photo-msg-text">. GANE LO QUE GANE, GANA LA DEMOCRACIA DIRECTA. GANAN LOS DE ABAJO.</span></div>';
+    container_html += '<div id="home-msg"><span class="home-msg-text" id="photo-msg-text">Ser alcalde / alcaldesa es ser la máxima autoridad de una ciudad. Serlo en Madrid es tan fácil como votar estas dos propuestas ciudadanas en http://decide.madrid.es/vota. Salga lo que salga, gana la democracia directa. Ganamos los de abajo. Celebremos que todas podemos ser alcaldesas.  Hazte un GIF o descárgate una chapita. Soy alcaldesa, ¿y tú?</span></div>';
+    //container_html += '<div id="home-msg"><span class="home-msg-text" id="photo-msg-text">PARA HACERTE ALCALDE/ALCALDESA DE MADRID, LO TIENES FÁCIL. PUEDES VOTAR EN <span class="photo-msg-text" id="photo-msg-text-mark">HTTPS://DECIDE.MADRID.ES/VOTA</span> <span class="photo-msg-text" id="photo-msg-text">LAS DOS PROPUESTAS CIUDADANAS Y </span><span  class="photo-msg-text" id="photo-msg-text-mark">HACERTE UN GIF PERSONALIZADO</span><span class="photo-msg-text" id="photo-msg-text">. GANE LO QUE GANE, GANA LA DEMOCRACIA DIRECTA. GANAN LOS DE ABAJO.</span></div>';
     container_html += '<div id="gifer-container">';
       container_html += '<img class="svg-obj" id="hazte-alcalde-sa" src="data/images/hazte_alcalde_sa.svg" />';
       container_html += '<img class="svg-obj" id="descarga_tu_chapa" src="data/images/descarga_tu_chapa.svg" />';
-      container_html += '<div id="chapas-container""><img class="svg-obj" id="chapa_alcaldesa" src="data/images/chapa_alcaldesa.svg" />';
-      container_html += '<img class="svg-obj" id="chapa_alcalde" src="data/images/chapa_alcalde.svg" />';
-      if(!mobile){
+      container_html += '<div id="chapas-container">';
+      if(mobile){
+          container_html += '<img class="svg-obj" id="chapa_alcaldesa" src="data/images/chapa_alcaldesa.svg" />';
+          container_html += '<img class="svg-obj" id="chapa_alcalde" src="data/images/chapa_alcalde.svg" />';
+      }
+      else{
+          container_html += '<img class="svg-obj-small" id="chapa-gif" src="data/images/YoSoyAlcalde.gif" />';
+          container_html += '<img class="svg-obj-small" id="chapa-gif" src="data/images/YoSoyAlcalde.gif" />';
           container_html += '<img class="svg-obj" id="chapa_alcaldesa" src="data/images/chapa_alcaldesa.svg" />';
           container_html += '<img class="svg-obj" id="chapa_alcalde" src="data/images/chapa_alcalde.svg" />';
       }
@@ -167,6 +173,9 @@ function drawNumber(){
 
     $("#descarga_tu_chapa")
         .on("click",function(d){
+            $.post("https://somosalcaldesas.org/api/counter/","",function(d){
+                console.log("CONTADO ");
+            });
             var a = document.createElement("a");
                 document.body.appendChild(a);
                 a.style = "display: none";
@@ -266,10 +275,10 @@ function drawResult(url){
     $(".share-result").on("click",function(d){
         var type = this.id.split('-')[2];
         if(type=="tw"){
-            window.open("http://twitter.com/share?text=text goes here&url=http://url goes here&hashtags=hashtag1,hashtag2,hashtag3","_blank");
+            window.open("http://twitter.com/share?text=Yo ya soy alcaldesa. Tú también puedes serlo en &hashtags=SomosAlcaldesas&url=http://somosalcaldesas.org","_blank");
 
         }else if(type="fb"){
-            window.open("https://www.facebook.com/sharer/sharer.php?u=http%3A//loquesea.org","_blank");
+            window.open("https://www.facebook.com/sharer/sharer.php?u=http://somosalcaldesas.org","_blank");
 
         }else if(type="link"){
             
@@ -410,7 +419,7 @@ $(document).ready(function(){
     }
 
     drawMain();
-    //drawResult();
+    drawResult();
 
     window.setInterval(function(){
         $(".title").css("opacity",function(i,d){

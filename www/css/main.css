@@ -23,6 +23,10 @@ body{
 }
 .counter-texts{
     font-size: 50px;
+    margin-top: -5%;
+}
+#counter{
+    margin-top: 0%;
 }
 #main{
     font-family: "Cabin";
@@ -36,6 +40,9 @@ body{
     transform: translate(-100px,0px)scale(0.7);
     margin-bottom: 30px;
     margin-top: 60px;
+}
+.svg-obj-small{
+    transform: scale(0.4);
 }
 .svg-obj{
     transform: scale(0.5);
@@ -56,7 +63,7 @@ body{
 }
 #giffer-container-table{
     position: absolute;
-    top: 110%;
+    top: 100%;
     right: 16%;
 }
 #footer {
@@ -139,7 +146,7 @@ body{
     cursor: pointer;
 }
 #home-msg{
-    font-size: 30px;
+    font-size: 20px;
     width: 70%;
     text-align: justify;
     position: absolute;
@@ -147,7 +154,8 @@ body{
     /*left: 14%;*/
 }
 #chapas-container{
-    margin-left: -10%;
+    margin-left: -1%;
+    margin-top: -5%;
 }
 #descarga_tu_chapa{
     cursor: pointer;
@@ -157,4 +165,14 @@ body{
     height: auto;
     padding-right: 8%;
     padding-bottom: 8%;
+}
+#pre-counter{
+    position: absolute;
+    left: -42%;
+}
+#post-counter{
+     margin-left: 54%;
+}
+#chapa-gif{
+    margin-left: -8%;
 }
