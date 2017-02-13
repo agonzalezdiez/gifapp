@@ -80,14 +80,14 @@ function drawMain(){
       container_html += '<img class="svg-obj" id="descarga_tu_chapa" src="data/images/descarga_tu_chapa.svg" />';
       container_html += '<div id="chapas-container">';
       if(mobile){
-          container_html += '<img class="svg-obj" id="chapa_alcaldesa" src="data/images/chapa_alcaldesa.svg" />';
-          container_html += '<img class="svg-obj" id="chapa_alcalde" src="data/images/chapa_alcalde.svg" />';
+          container_html += '<img class="svg-obj" id="chapa-alcaldesa" src="data/images/chapa_alcaldesa.svg" />';
+          container_html += '<img class="svg-obj" id="chapa-alcalde" src="data/images/chapa_alcalde.svg" />';
       }
       else{
           container_html += '<img class="svg-obj-small" id="chapa-gif" src="data/images/YoSoyAlcalde.gif" />';
           container_html += '<img class="svg-obj-small" id="chapa-gif" src="data/images/YoSoyAlcalde.gif" />';
-          container_html += '<img class="svg-obj" id="chapa_alcaldesa" src="data/images/chapa_alcaldesa.svg" />';
-          container_html += '<img class="svg-obj" id="chapa_alcalde" src="data/images/chapa_alcalde.svg" />';
+          container_html += '<img class="svg-obj" id="chapa-alcaldesa" src="data/images/chapa_alcaldesa.svg" />';
+          container_html += '<img class="svg-obj" id="chapa-alcalde" src="data/images/chapa_alcalde.svg" />';
       }
       container_html += '</div>';
       container_html += giffer_html;
