@@ -215,7 +215,7 @@ var Demo = (function(file) {
 
 	function init() {
 		//bindNavigation();
-		//demoMain();
+		demoMain();
 		//demoBasic();	
 		//demoVanilla();	
 		demoUpload();

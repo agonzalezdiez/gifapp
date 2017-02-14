@@ -385,13 +385,20 @@ function handleImage(e){
 
         //console.log("EVENT",event.target.result);
         $("#photo-container").append('<span id="cropping-done-btn">GENERAR GIF</span>');
+        var zoom_var = true;
+
+        if(mobile){ zoom_var = true; }
 
         var basic = $('#uploaded-img-container').croppie({
             viewport: {
                 width: 320,
                 height: 320
             },
-            enableZoom: false
+            boundary: {
+                width: 320,
+                height: 320
+            },
+            enableZoom: zoom_var
         });
         basic.croppie('bind', {
             url: event.target.result,
@@ -403,7 +410,8 @@ function handleImage(e){
         $("#cropping-done-btn")
             .css("cursor","pointer")
             .on("click",function(d){
-                basic.croppie('result').then(function(result){
+                basic.croppie('result', {type: 'canvas', size:{width:320,height:320}}).then(function(result){
+                    //popupResult({src: result.toDataURL()});
                     generateGif(result,"aa.png");
                     /*var url = window.URL.createObjectURL(result);
                     var a = document.createElement("a");
