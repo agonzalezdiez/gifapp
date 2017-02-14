@@ -51,7 +51,8 @@ body{
     transform: scale(0.5);
 }
 #rrss-container{
-    display: table-caption;
+   /* display: table-caption;*/
+    display: none;
     position: absolute;
     top: 400px;
     right: 5%;
