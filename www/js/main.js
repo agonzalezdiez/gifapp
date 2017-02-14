@@ -18,7 +18,7 @@ var title_left = "40%";
 
 function drawMain(){
 
-    var images = ["data/images/YoSoyAlcalde.gif", "data/images/gif1.gif", "data/images/YoSoyAlcalde.gif", "data/images/gif2.gif", "data/images/YoSoyAlcalde.gif", "data/images/gif3.gif", "data/images/YoSoyAlcalde.gif", "data/images/gif4.gif", "data/images/YoSoyAlcalde.gif","data/images/gif5.gif","data/images/YoSoyAlcalde.gif"];
+    var images = ["data/images/gif1.gif", "data/images/YoSoyAlcalde.gif", "data/images/gif2.gif", "data/images/YoSoyAlcalde.gif", "data/images/gif3.gif", "data/images/YoSoyAlcalde.gif", "data/images/gif4.gif", "data/images/YoSoyAlcalde.gif","data/images/gif5.gif"];
     //var images = ["data/images/YoSoyAlcalde.gif","data/images/YoSoyAlcalde.gif","data/images/YoSoyAlcalde.gif","data/images/YoSoyAlcalde.gif","data/images/YoSoyAlcalde.gif","data/images/YoSoyAlcalde.gif"];
 
     var columns = 3;
