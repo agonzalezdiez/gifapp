@@ -11,6 +11,7 @@ var msg_top = "40%";
 var msg_left = "14%";
 var gifer_cont_top = "55%";
 var chapas_left = "1%";
+var chapas_top = "-17%";
 
 var table_right = "16%";
 var title_left = "40%";
@@ -196,6 +197,7 @@ function drawNumber(){
     }*/
    $("#gifer-container").css("top",gifer_cont_top);
    $("#chapas-container").css("margin-left",chapas_left);
+   $("#chapas-container").css("margin-top",chapas_top);
    $("#giffer-container-table").css("right",table_right);
    $(".title").css("left",title_left);
 
@@ -427,7 +429,8 @@ $(document).ready(function(){
         msg_top = "30%";
         msg_left = "15%";
         gifer_cont_top = "45%";
-        chapas_left = "17%";
+        chapas_left = "18%";
+        chapas_top = "-4%";
         table_right = "0%";
         title_left= "25%";
     }
