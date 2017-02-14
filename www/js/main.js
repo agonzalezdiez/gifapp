@@ -388,15 +388,16 @@ function handleImage(e){
 
         var basic = $('#uploaded-img-container').croppie({
             viewport: {
-                width: 150,
-                height: 200
+                width: 320,
+                height: 320
             },
-            enableZoom: true
+            enableZoom: false
         });
         basic.croppie('bind', {
             url: event.target.result,
             //url: "data/cat.jpg",
-            points: [77, 469, 280, 739]
+            points: [0,0,0,0]
+            //points: [77, 469, 280, 739]
         });
 
         $("#cropping-done-btn")
