@@ -113,7 +113,7 @@ function drawMain(){
     var footer_html = '';
 
     footer_html += '<div id="footer">';
-    footer_html += '<span id="footer-msg">Esta web es una iniciativa de lacocTELLera, un grupo de trabajo de Medial-prado de Madrid. Es una campaña de la sociedad civil, totalmente independiente. La idea surgió en el encuentro #cócTELL de narrativas de la participación.</span>';
+    footer_html += '<span id="footer-msg">Esta web es una iniciativa de lacocTELLera, un grupo de trabajo independiente de Madrid. Es una campaña de la sociedad civil, totalmente independiente. La idea surgió en el encuentro #cócTELL de narrativas de la participación.</span>';
     footer_html += '<span id="footer-twitter">API TWITTER</span>';
     footer_html += '';
     footer_html += '</div>';
