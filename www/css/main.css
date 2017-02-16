@@ -97,6 +97,9 @@ body{
     font-size: 30px;
     text-align: justify;
 }
+#photo-msg-text{
+    pointer-events: none;
+}
 #photo-msg-text-mark{
     text-decoration: underline;
 }
@@ -154,6 +157,7 @@ body{
     width: 70%;
     text-align: justify;
     position: absolute;
+    z-index: 1000;
     /*top: 75%;*/
     /*left: 14%;*/
 }

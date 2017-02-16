@@ -9,7 +9,7 @@ var buttons_left = "15%";
 
 var msg_top = "40%";
 var msg_left = "14%";
-var gifer_cont_top = "55%";
+var gifer_cont_top = "65%";
 var chapas_left = "1%";
 var chapas_top = "-17%";
 
@@ -75,7 +75,7 @@ function drawMain(){
       container_html += '</div>';
       container_html += '<div class="counter-texts" id="post-counter"><object class="svg-obj" id="alcaldesas" data="data/images/alcaldesas.svg" type="image/svg+xml"></object></div>';
     container_html += '</div>';
-    container_html += '<div id="home-msg"><span class="home-msg-text" id="photo-msg-text">Ser alcalde / alcaldesa es ser la máxima autoridad de una ciudad. Serlo en Madrid es tan fácil como votar estas dos propuestas ciudadanas en http://decide.madrid.es/vota. Salga lo que salga, gana la democracia directa. Ganamos los de abajo. Celebremos que todas podemos ser alcaldesas.  Hazte un GIF o descárgate una chapita. Soy alcaldesa, ¿y tú?</span></div>';
+    container_html += '<div id="home-msg"><span class="home-msg-text" id="photo-msg-text">Ser alcalde / alcaldesa es ser la máxima autoridad de una ciudad. Serlo en Madrid es tan fácil como votar estas dos propuestas ciudadanas en http://decide.madrid.es/vota. Salga lo que salga, gana la democracia directa. Ganamos los de abajo. Celebremos que todas podemos ser alcaldesas.  Hazte un GIF o descárgate una chapita. Soy alcaldesa, ¿y tú?</span></br></br><span class="home-msg-text" id="fanzine-link">Y ya tenemos fanzine...! Accede AQUÍ</span></div>';
     //container_html += '<div id="home-msg"><span class="home-msg-text" id="photo-msg-text">PARA HACERTE ALCALDE/ALCALDESA DE MADRID, LO TIENES FÁCIL. PUEDES VOTAR EN <span class="photo-msg-text" id="photo-msg-text-mark">HTTPS://DECIDE.MADRID.ES/VOTA</span> <span class="photo-msg-text" id="photo-msg-text">LAS DOS PROPUESTAS CIUDADANAS Y </span><span  class="photo-msg-text" id="photo-msg-text-mark">HACERTE UN GIF PERSONALIZADO</span><span class="photo-msg-text" id="photo-msg-text">. GANE LO QUE GANE, GANA LA DEMOCRACIA DIRECTA. GANAN LOS DE ABAJO.</span></div>';
     container_html += '<div id="gifer-container">';
       container_html += '<img class="svg-obj" id="hazte-alcalde-sa" src="data/images/hazte_alcalde_sa.svg" />';
@@ -212,6 +212,11 @@ function drawNumber(){
             window.open("https://www.facebook.com/sharer/sharer.php?u=http://somosalcaldesas.org","_blank");
 
         }
+   });
+
+   $("#fanzine-link").css("cursor","pointer").on("click",function(){
+       console.log("CLICK FANZINE");
+       window.open("data/FANZINACO-media.pdf","_blank");
    });
 }
 
